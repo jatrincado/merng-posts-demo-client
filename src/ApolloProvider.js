@@ -7,9 +7,10 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from 'apollo-link-context';
+import { offsetLimitPagination } from "@apollo/client/utilities";
 
 const httpLink = createHttpLink({
-	uri: "https://evening-lake-29894.herokuapp.com/",
+  uri: "http://localhost:5000",
 });
 
 const authLink = setContext(() => {
@@ -21,9 +22,19 @@ const authLink = setContext(() => {
   };
 });
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        getPosts: offsetLimitPagination()
+      }
+    }
+  }
+})
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: cache,
   connectToDevTools: true,
 });
 

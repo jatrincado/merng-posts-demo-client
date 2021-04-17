@@ -16,6 +16,8 @@ function DeleteButton({ postId, commentId, callback }) {
 		update(proxy) {
 			setConfirmOpen(false);
 			if (!commentId) {
+				// TODO: meter los posts al context
+				// TODO: probar la query con limit y offset
 				const data = proxy.readQuery({
 					query: FETCH_POSTS_QUERY,
 				});
