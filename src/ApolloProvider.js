@@ -10,7 +10,7 @@ import { setContext } from 'apollo-link-context';
 import { offsetLimitPagination } from "@apollo/client/utilities";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000",
+  uri: "https://evening-lake-29894.herokuapp.com/",
 });
 
 const authLink = setContext(() => {
